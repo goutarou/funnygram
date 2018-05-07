@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Funnygram</title>
+    <%= csrf_meta_tags %>
+
+    <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track': 'reload' %>
+    <%= javascript_include_tag 'application', 'data-turbolinks-track': 'reload' %>
+  </head>
+  <body>
+    <header class = 'hedder-color'>
+      <div class = 'container-fluid'>
+        <% if user_signed_in? %>
+          <div class = 'row row-height'>
+            <ul class = 'nav nav-tabs nav-center'>
+              <li role = 'presentation' class = 'dropdown'>
+                <a class = 'dropdown-toggle' data-toggle = 'dropdown'>
+                  メニュー<span class = 'caret'></span>
+                </a>
+                <ul class = 'dropdown-menu' role = 'menu'>
+                  <li role = 'presentation' class = 'activ'><%= link_to 'タイムライン', root_path %></li>
+                  <li role = 'presentation' class = 'activ'><%= link_to '投稿ページ', new_post_image_path %></li>
+                  <li role = 'presentation' class = 'activ'><%= link_to 'マイページ', user_path(current_user.id) %></li>
+                  <li role = 'presentation' class = 'activ'><%= link_to "ログアウト", destroy_user_session_path, method: :delete %></li>
+                </ul>
+              </li>
+            </ul>
+          </div>
+        <% else %>
+          <div class = 'row'>
+            <%= link_to "新規登録", new_user_registration_path %>
+            <%= link_to "ログイン", new_user_session_path %>
+          </div>
+        <% end %>
+      </div>
+    </header>
+      <%= yield %>
+  </body>
+</html>

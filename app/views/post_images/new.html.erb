@@ -1,0 +1,22 @@
+<%= form_for(@post_image) do |f| %>
+  <% if @post_image.errors.any? %>
+    <%= @post_image.errors.count %>件のエラーが発生しました<br>
+    <% @post_image.errors.full_messages.each do |message| %>
+      <%= message %><br>
+    <% end %>
+  <% end %>
+  <div class = "container-fluid">
+    <br>
+    <div class = 'row'>
+      <div class = 'col-xs-12'>
+        <%= f.attachment_field :image %>
+      </div>
+      <div class = "col-xs-12">
+        <%= f.text_area :comment %>
+      </div>
+      <div class = "col-xs-12">
+        <%= f.submit %>
+      </div>
+    </div>
+  </div>
+<% end %>

@@ -1,0 +1,58 @@
+<div class = 'container-fluid'>
+  <br>
+  <div class = 'row row-height'>
+    <div class = 'col-xs-1'>
+    </div>
+    <div class = 'col-xs-3'>
+      <%= attachment_image_tag @post_image.user, :profile_image, class: "img-circle img-responsive center-block", fallback: "no_image.jpg"%>
+    </div>
+    <div class = 'col-xs-7'>
+      <%= @post_image.user.name %> さんの投稿<br>
+      <span class="glyphicon glyphicon-wrench" aria-hidden="true"></span>
+      <%= link_to "編集", edit_post_image_path(@post_image.id) %>
+      <span class="glyphicon glyphicon-wrench" aria-hidden="true"></span><br>
+      <span class="glyphicon glyphicon-trash" aria-hidden="true"></span>
+      <%= link_to "削除", post_image_path(@post_image), method: :delete, "data-confirm" => "本当に削除しますか？" %>
+      <span class="glyphicon glyphicon-trash" aria-hidden="true"></span>
+    </div>
+    <div class = 'col-xs-1'>
+    </div>
+  </div>
+  <br>
+  <div class = 'row new-line'>
+    <div class = 'col-xs-10 col-xs-offset-1 '>
+      <%= attachment_image_tag @post_image, :image, class: "img-responsive center-block" %>
+    </div>
+    <div class = 'col-xs-10 col-xs-offset-1 '>
+      <p class = 'text-center'><%= @post_image.comment %></p>
+      <p class = 'text-right'><%= @post_image.created_at.strftime('%Y/%m/%d  %H:%M') %></p>
+    </div>
+  </div>
+  <br>
+
+  <% @post_image.comments.each do |comment| %>
+    <div class = 'row border-top row-height text-updown'>
+      <div class = 'col-xs-1'>
+      </div>
+      <div class = 'col-xs-2 text-center'>
+        <%= attachment_image_tag comment.user, :profile_image, class: "img-circle img-responsive center-block",fallback: "no_image.jpg"%>
+        <a href="#" ><%= comment.user.name %></a>
+      </div>
+      <div class = 'col-xs-8 new-line'>
+        <p><%= comment.comment %></p>
+        <p class = 'pull-right'><%= comment.created_at.strftime('%Y/%m/%d  %H:%M') %></p>
+      </div>
+      <div class = 'col-xs-1'>
+      </div>
+    </div>
+  <% end %>
+  <%= form_for [@post_image, @comment] do |f| %>
+    <div class="row">
+      <div class="col-sm-12">
+        <%= f.text_field :comment, rows:'5', class: "form-control",placeholder: "コメントをここに" %>
+      </div>
+    </div>
+    <%= f.submit "送信する", class: "btn btn-lg btn-base-1 mt-20 pull-right" %>
+  <% end %>
+</div>
+<br>

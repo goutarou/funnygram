@@ -1,0 +1,27 @@
+<br>
+<div class = 'container-fluid'>
+  <div class = 'row'>
+    <div class = 'col-xs-10 col-xs-offset-1'>
+      <div class = 'row text-center'>
+        <div class = 'col-xs-12'>
+          <h1>編集画面</h1>
+        </div>
+        <%= form_for(@post_image) do |f| %>
+          <div class = 'col-xs-12'>
+            <h4>タイトル</h4>
+            <%= f.text_field :comment %>
+          </div>
+          <div class = 'col-xs-12'>
+            <h4>画像</h4>
+            <%= f.attachment_field :image %>
+          </div>
+          <br>
+          <br>
+          <div class = 'col-xs-12'>
+            <%= f.submit '保存' %>
+          </div>
+        <% end %>
+      </div>
+    </div>
+  </div>
+</div>

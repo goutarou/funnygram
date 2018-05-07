@@ -1,0 +1,70 @@
+<div class = 'container-fluid'>
+  <br>
+  <div class = 'row row-height'>
+    <div class = 'col-xs-3'>
+    </div>
+    <div class = 'col-xs-6'>
+      <%= attachment_image_tag @user, :profile_image, class: "img-circle img-responsive", fallback: "no_image.jpg"%>
+    </div>
+    <div class = 'col-xs-3'>
+    </div>
+    <div class = 'col-xs-12 text-center'>
+      <span class="glyphicon glyphicon-wrench" aria-hidden="true"></span>
+      <%= link_to "プロフィールを変更", edit_user_path(@user.id) %>
+      <span class="glyphicon glyphicon-wrench" aria-hidden="true"></span>
+    </div>
+    <div class  'col-xs-12'>
+      <span class="glyphicon glyphicon-heart" aria-hidden="true" style="color: red;"></span>
+      <%= link_to "お気に入りした投稿", favorites_user_path(@user.id) %>
+      <span class="glyphicon glyphicon-heart" aria-hidden="true" style="color: red;"></span>
+    </div>
+  </div>
+  <br>
+  <% @user.post_images.each do |post_image| %>
+    <div class = 'row row-height border-bottom'>
+      <div class = 'col-xs-1'>
+      </div>
+      <div class = 'col-xs-10 text-center'>
+        <%= link_to post_image_path(post_image.id) do %>
+          <div class = 'row'>
+            <div cladd = 'co,col-xs-12'>
+              <%= attachment_image_tag post_image,  :image, format: 'jpeg', class: "img-responsive center-block"%>
+            </div>
+          </div>
+          <div class = 'row new-line'>
+            <div class = 'col-xs-12 text-left'>
+              <%= post_image.comment %>
+            </div>
+          </div>
+          <div class = 'row row-height'>
+            <div class = 'col-xs-12 text-right'>
+              by <%= @user.name %>
+            </div>
+          </div>
+        <% end %>
+        <div class = 'row'>
+          <div class = 'col-xs-6'>
+            <% if post_image.favorited_by?(current_user) %>
+              <%= link_to post_image_favorites_path(post_image), method: :delete do %>
+                <span class="glyphicon glyphicon-heart" aria-hidden="true" style="color: red;"></span>
+                <%= post_image.favorites.count %>
+              <% end %>
+            <% else %>
+              <%= link_to post_image_favorites_path(post_image), method: :post do %>
+                <span class="glyphicon glyphicon-heart" aria-hidden="true"></span>
+                <%= post_image.favorites.count %>
+              <% end %>
+            <% end %>
+          </div>
+          <div class = 'col-xs-6'>
+            <span class="glyphicon glyphicon-comment" aria-hidden="true"></span>
+            <%= post_image.comments.count %>
+          </div>
+        </div>
+      </div>
+      <div class = 'col-xs-1'>
+      </div>
+    </div>
+    <br>
+  <% end%>
+</div>

@@ -1,0 +1,76 @@
+/*
+ * This is a manifest file that'll be compiled into application.css, which will include all the files
+ * listed below.
+ *
+ * Any CSS and SCSS file within this directory, lib/assets/stylesheets, or any plugin's
+ * vendor/assets/stylesheets directory can be referenced here using a relative path.
+ *
+ * You're free to add application-wide styles to this file and they'll appear at the bottom of the
+ * compiled file so the styles you add here take precedence over styles defined in any other CSS/SCSS
+ * files in this directory. Styles in this file should be added after the last require_* statement.
+ * It is generally better to create a new file per style scope.
+ *s
+ *= require_tree .
+ *= require_self
+ */
+ @import "bootstrap-sprockets";
+ @import "bootstrap";
+
+ /*箱の色の試し*/
+ .color{
+   background-color: rgb(166, 205, 145);
+ }
+
+ /*ナビゲーションバーの背景を薄青*/
+.hedder-color{
+  background-color: rgb(27, 31, 66);
+}
+
+ /*改行する*/
+ .new-line {
+   word-wrap: break-word;
+ }
+
+/*箱の高さを等しくする*/
+.row-height{
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+}
+
+/*ナビゲーションバーの中央寄せ*/
+.nav-center{
+  margin: 0 auto;
+  display: table;
+  table-layout: fixed;
+  float:none;
+}
+
+/*テキストの上下の中央寄せ*/
+.text-updown{
+  display: flex;
+	align-items: center;
+}
+/*ボーダーぼっとん*/
+.border-bottom{
+  border-bottom: solid 1px rgb(166, 157, 136);
+}
+
+/*ボーダーtop*/
+.border-top{
+  border-top: solid 1px rgb(222, 245, 243);
+}
+
+.parent{
+  position: relative;
+}
+.children{
+  position: absolute;
+	right: 0px;
+	bottom: 0px;
+}
+
+
+.img-center{
+  text-align: center;
+}

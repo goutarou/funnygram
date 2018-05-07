@@ -1,0 +1,53 @@
+<br>
+<div class = 'container-fluid'>
+  <% @post_images.each do |post_image| %>
+    <div class = 'row row-height border-bottom'>
+      <div class = 'col-xs-12 text-center'>
+        <%= link_to post_image_path(post_image.id) do %>
+          <div class = 'row'>
+            <div class = 'col-xs-12'>
+              <%= attachment_image_tag post_image,  :image, format: 'jpeg', class: "img-responsive center-block"%>
+            </div>
+          </div>
+          <div class = 'row new-line'>
+            <div class = 'col-xs-12 text-left'>
+              <%= post_image.comment %>
+            </div>
+          </div>
+        <% end %>
+        <br>
+        <div class = 'row row-height'>
+          <div class = 'col-xs-3'>
+            <%= link_to user_path(post_image.user.id) do %>
+              <%= attachment_image_tag post_image.user, :profile_image, class: "center-block img-circle img-responsive", fallback: "no_image.jpg"%>
+            <% end %>
+          </div>
+          <div class = 'col-xs-6 text-updown'>
+            <div class = 'row'>
+              <div class = 'col-xs-12'>
+                <% if post_image.favorited_by?(current_user) %>
+                  <%= link_to post_image_favorites_path(post_image), method: :delete do %>
+                  <span class="glyphicon glyphicon-heart" aria-hidden="true" style="color: red;"></span>
+                  <%= post_image.favorites.count %>
+                  <% end %>
+                <% else %>
+                  <%= link_to post_image_favorites_path(post_image), method: :post do %>
+                    <span class="glyphicon glyphicon-heart" aria-hidden="true"></span>
+                    <%= post_image.favorites.count %>
+                  <% end %>
+                <% end %>
+              </div>
+              <div class = 'col-xs-12'>
+                <%= link_to post_image_path(post_image.id) do %>
+                  <span class="glyphicon glyphicon-comment" aria-hidden="true"></span>
+                  <%= post_image.comments.count %>
+                <% end %>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <br>
+  <% end %>
+</div>
